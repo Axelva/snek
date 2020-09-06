@@ -1,4 +1,6 @@
-export const food = {x: 2, y: 6};
+import { snakeBody } from "./snek.js";
+
+export let food = randomizeLocation();
 
 export function drawFood(gameBoard) {
     let foodElement = document.createElement("div"); //div creation but it isn't added to the HTML
@@ -8,7 +10,14 @@ export function drawFood(gameBoard) {
     gameBoard.appendChild(foodElement); //div is now added to the HTML, to its parent : game-grid
 }
 
-export function updateFood() {
-        food.x = Math.floor(Math.random() * 21) + 1;
-        food.y = Math.floor(Math.random() * 21) + 1;
+export function randomizeLocation() {
+    return {
+        x: Math.floor(Math.random() * 21) + 1,
+        y: Math.floor(Math.random() * 21) + 1
+    }
+}
+
+export function foodBecomesSnake() {
+    food = randomizeLocation(); //then change food location randomly
+    snakeBody.push({x: -1, y: -1}); //to add a snake piece. Empty array doesn't work. updateSnake() then adds it to the right location
 }
